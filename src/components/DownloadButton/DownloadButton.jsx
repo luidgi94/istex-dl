@@ -113,9 +113,10 @@ export default function DownloadButton () {
   return (
     <div className='mt-6'>
       <button
-        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4'
+        className='text-white font-bold py-2 px-4 bg-[#458ca5]'
         onClick={onDownload}
         disabled={isFormIncomplete}
+
       >
         Télécharger
       </button>
