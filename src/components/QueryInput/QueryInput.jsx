@@ -13,6 +13,7 @@ import eventEmitter, { events } from '../../lib/eventEmitter';
 import { queryModes, istexApiConfig } from '../../config';
 import { RadioGroup } from '@headlessui/react';
 import { CloudUploadIcon } from '@heroicons/react/solid';
+import ExamplesButton from '../ExamplesButton/ExamplesButton';
 
 export default function QueryInput () {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export default function QueryInput () {
   const [arkInputValue, setArkInputValue] = useState('');
 
   const queryStringHandler = newQueryString => {
+
     if (!newQueryString) {
       setArkInputValue('');
     }
@@ -33,7 +35,6 @@ export default function QueryInput () {
       setCurrentQueryMode(queryModes.getDefault());
       setQueryStringInputValue(newQueryString);
     }
-
     updateQueryString(newQueryString);
   };
 
@@ -121,6 +122,9 @@ export default function QueryInput () {
     // TODO: print the error in a modal or something else
     reader.onerror = console.error;
   };
+  const queryStyle = {
+    justifyContent: 'space-between'
+  };
 
   useEffect(() => {
     eventEmitter.addListener(events.setQueryMode, queryModeHandler);
@@ -201,7 +205,7 @@ export default function QueryInput () {
 
   return (
     <div>
-      <div>
+      <div className='flex' style={queryStyle}>
         <RadioGroup
           className='flex'
           value={currentQueryMode}
@@ -223,10 +227,18 @@ export default function QueryInput () {
             </div>
           ))}
         </RadioGroup>
+        <div className="flex" id="headlessui-radiogroup-8" role="radiogroup">
+          <ExamplesButton 
+            setQueryStringInputValue={setQueryStringInputValue} 
+            updateQueryString={updateQueryString} 
+          />  
+        </div>
       </div>
       <div className='my-2'>
         {queryInputUi}
       </div>
     </div>
+
+
   );
 }
